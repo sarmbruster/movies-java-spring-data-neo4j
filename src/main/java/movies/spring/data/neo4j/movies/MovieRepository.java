@@ -18,4 +18,7 @@ interface MovieRepository extends Repository<Movie, String> {
 
 	@Query("MATCH (movie:Movie) WHERE movie.title CONTAINS $title RETURN movie")
 	List<Movie> findSearchResults(@Param("title") String title);
+
+	@Query("MATCH (m:Movie) RETURN m.title as title, m.tagline as tagline")
+	List<SimpleMovie> customAll();
 }

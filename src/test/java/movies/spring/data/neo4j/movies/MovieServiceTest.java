@@ -51,6 +51,13 @@ class MovieServiceTest {
     }
 
     @Test
+    public void custom_query(@Autowired MovieRepository movieRepository) {
+        assertThat(movieRepository.customAll())
+                .hasSize(3)
+                .extracting(mr -> mr.title()).containsExactlyInAnyOrder("The Matrix", "The Matrix Reloaded", "The Matrix Revolutions");
+    }
+
+    @Test
     public void searches_movies_by_title(@Autowired MovieService service) {
         String title = "Matrix Re";
         assertThat(service.searchMoviesByTitle(title))
